@@ -1,7 +1,10 @@
 from autoscraper import AutoScraper
+
 import csv
+
 import requests
 import bs4
+
 import time
 
 
@@ -41,7 +44,7 @@ for link in links:
 clean_urls = []
 for x in URLS:
     if "/en/exhibitors/" in str(x):
-        clean_urls.append('https://expoplaza-tuttofood.fieramilano.it/en/exhibitors' + str(x))
+        clean_urls.append('https://expoplaza-tuttofood.fieramilano.it' + str(x))
     else:
         continue
 
@@ -49,11 +52,13 @@ rows = []
 #scrape emails from clean url list
 for i in clean_urls:
     z = 0
-    rows.append(scraper.get_result_similar(clean_urls[z]))
+    fetch = scraper.get_result_similar(clean_urls[z])
+    print(fetch)
+    rows.append(fetch)
     z += 1
-    time.sleep(4)
+    time.sleep(2)
 
-
+rows.append(result_list)
 # field names 
 fields = ['Address', 'City', 'Country', 'Website', 'Stand', 'Phone', 'Email'] 
   
